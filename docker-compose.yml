@@ -1,0 +1,21 @@
+version: '3'
+#context: specify where want all our files & folders for the image to be pulled from 
+#dockerfile: dockerfile name inside the "context" directory
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000" 
+    volumes:
+      - /app/node_modules
+      - .:/app
+  tests:
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - .:/app
+    command: ["npm","run","test"]
